@@ -213,8 +213,11 @@ def get_advice(label, lang):
 
 # -------------------- PREDICTION (TFLITE) --------------------
 def predict_image(path):
-    img = load_img(path, target_size=IMG_SIZE)
-    arr = img_to_array(img).astype("float32") / 255.0
+    # PIL + numpy se image load & resize
+    img = Image.open(path).convert("RGB").resize(IMG_SIZE)
+    arr = np.array(img).astype("float32") / 255.0
+
+    # batch dimension
     batch = np.expand_dims(arr, axis=0)
 
     # dtype align with tflite model
@@ -242,6 +245,7 @@ def predict_image(path):
     print("------------------------\n")
 
     return label, confidence, preds
+
 
 
 # -------------------- FLASK APP --------------------
