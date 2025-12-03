@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from PIL import Image
 import tensorflow as tf
-from tensorflow.keras.preprocessing.image import load_img, img_to_array
+
 
 # -------------------- CONFIG --------------------
 IMG_SIZE = (224, 224)  # ye hum niche TFLite se auto-adjust bhi kar denge
@@ -345,3 +345,4 @@ def predict():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
+
